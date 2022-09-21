@@ -1,4 +1,7 @@
 #include "account.h"
+#include <iostream>
+
+using namespace std;
 
 // definition
 namespace banking {
@@ -23,8 +26,13 @@ namespace banking {
 
     account::account(const string &iban) : account(iban, 10.0) {}
 
-    account::account(const string &iban, double balance) : iban(iban) {
+    /*
+    account::account(const string &iban, double balance) {
         this->balance = balance;
+        this->iban = iban;
+    }
+*/
+    account::account(const string &iban, double balance) : iban(iban), balance(balance) {
     }
 
     const string &account::getIban() const {
@@ -33,5 +41,9 @@ namespace banking {
 
     double account::getBalance() const {
         return balance;
+    }
+
+    account::~account(){
+        cout << "account::~account()" << endl;
     }
 } // banking

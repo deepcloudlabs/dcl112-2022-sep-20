@@ -25,5 +25,12 @@ int main() {
     pAcc->deposit(5000);
     std::cout << "balance: " << pAcc->getBalance() << endl;
     delete pAcc; // triggers class destructor
+
+    // constant object -> you can call ONLY constant methods?
+    const account acc2("tr1", 100000.50);
+    acc2.getBalance();
+    acc2.getIban();
+    // acc2.deposit(5'000); Error: cannot call mutator method through constant object
+    // account acc3; Error: No-argument/Default constructor does not exist!
     return 0;
 }

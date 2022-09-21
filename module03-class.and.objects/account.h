@@ -9,7 +9,7 @@ namespace banking {
     // information hiding
     class account {
     private: // default
-        // attributes/state/data/property
+        // attributes/field/state/data/property
         string iban;
         double balance;
     public:
@@ -18,13 +18,13 @@ namespace banking {
         explicit account(const string &iban);
 
         account(const string &iban, double balance);
-
+        ~account();
         // getters -> read-only methods
-        const string &getIban() const;
+        const string &getIban() const; // constant method
 
-        double getBalance() const;
+        double getBalance() const; // constant method
 
-        // business methods
+        // business methods -> mutator methods
         bool withdraw(const double amount);
 
         bool deposit(const double amount);
