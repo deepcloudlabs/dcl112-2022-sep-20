@@ -13,15 +13,43 @@ const string &customer::getLastName() const {
     return lastName;
 }
 
-account &customer::getCustomerAccount() {
-    return customerAccount[0];
+account *customer::getAccount(const int index) const {
+    if (index < 0) return nullptr;
+    if (index >= numOfAccounts) return nullptr;
+    return accounts[index];
 }
 
-void customer::setCustomerAccount(account *customerAccount) {
-    this->customerAccount = customerAccount;
+void customer::addAccount(account *customerAccount) {
+    if (numOfAccounts >= 10) return;
+    this->accounts[numOfAccounts++] = customerAccount;
+}
+
+double customer::getTotalBalance() const {
+    auto total = 0.0;
+    for (auto i = 0; i < numOfAccounts; ++i) {
+        total += accounts[i]->getBalance();
+    }
+    return total;
+}
+
+double customer::withdrawCost(const double cost) const {
+    auto total = 0.0;
+    for (auto i = 0; i < numOfAccounts; ++i) {
+        if(accounts[i]->withdraw(cost)){
+            total += cost;
+        }
+    }
+    return total;
 }
 
 customer::~customer() {
     cout << "customer::~customer()" << endl;
-    delete customerAccount;
+    for (auto i = 0; i < numOfAccounts; ++i) {
+        delete accounts[i];
+    }
+    delete[]accounts;
+}
+
+int customer::getNumberOfAccounts() const {
+    return numOfAccounts;
 }

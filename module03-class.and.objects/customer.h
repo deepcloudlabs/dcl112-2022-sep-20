@@ -11,20 +11,27 @@ namespace banking {
     class customer {
         string firstName;
         string lastName;
-        account *customerAccount;
-        int *p;
+        account **accounts; // one-to-many
+        int numOfAccounts;
     public:
-        customer(const string &firstName, const string &lastName, account *customerAccount)
+        customer(const string &firstName, const string &lastName)
                 : firstName(firstName), lastName(lastName),
-                  customerAccount(customerAccount) {}
+                  accounts(new account *[10]),
+                  numOfAccounts(0) {}
 
         const string &getFirstName() const;
 
         const string &getLastName() const;
 
-        account &getCustomerAccount();
+        account *getAccount(const int index) const;
 
-        void setCustomerAccount(account *customerAccount);
+        int getNumberOfAccounts() const;
+
+        void addAccount(account *customerAccount);
+
+        double getTotalBalance() const;
+
+        double withdrawCost(const double cost) const;
 
         ~customer();
     };

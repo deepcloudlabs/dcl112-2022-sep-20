@@ -2,42 +2,43 @@
 #include "customer.h"
 #include "account.h"
 #include "savings_account.h"
+#include "checking_account.h"
 
 using banking::customer;
 using banking::account;
 using banking::SavingsAccount;
+using banking::CheckingAccount;
 using namespace std;
 
 int main() {
-    customer *cust; // pointer is at the stack
-    account acc1("tr1", 500.0); // stack object
+    cout << "Creating the customer Jack Bauer." << endl;
+    auto jack = new customer("jack", "bauer"); // pointer points the object at the heap
 
-    // Create an account that can has a 500.00 balance.
-    cout << endl << "Creating the customer Jane Smith.";
-    cust = new customer("Jane", "Smith", nullptr); // pointer points the object at the heap
-    cout << endl << "Creating her account with a 500.00 balance.";
+    jack->addAccount(new SavingsAccount("tr1", 1'000'000, 12));
+    jack->addAccount(new CheckingAccount("tr2", 2'000'000, 5'000));
+    jack->addAccount(new account("tr3", 3'000'000));
 
-    cust->setCustomerAccount(new SavingsAccount("tr1",1'000'000,12));
-    acc1 = cust->getCustomerAccount();
+    // Print out the final account balance
+    cout << "Customer ["
+         << jack->getLastName()
+         << ", "
+         << jack->getFirstName()
+         << "] has a balance of "
+         << jack->getTotalBalance()
+         << endl;
 
-    cout << endl << "Withdraw 150.00";
-    acc1.withdraw(150.00);
-
-    cout << endl << "Deposit 22.50";
-    acc1.deposit(22.50);
-
-    cout << endl << "Withdraw 47.62";
-    acc1.withdraw(47.62);
+    jack->withdrawCost(800);
 
     // Print out the final account balance
     cout << endl
          << "Customer ["
-         << cust->getLastName()
+         << jack->getLastName()
          << ", "
-         << cust->getFirstName()
+         << jack->getFirstName()
          << "] has a balance of "
-         << acc1.getBalance()
+         << jack->getTotalBalance()
          << endl;
-    delete cust; // destroys the customer object! -> calls destructor
+
+    delete jack; // destroys the customer object! -> calls destructor
     return 0;
 }
