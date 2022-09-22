@@ -42,7 +42,7 @@ namespace banking {
         if (numOfCustomers == 5) {
             return nullptr;
         }
-        auto pCustomer = new customer(firstName, lastName, iban);
+        auto pCustomer = new customer(firstName, lastName, new account(iban));
         customers[numOfCustomers] = pCustomer;
         numOfCustomers++;
         return pCustomer;

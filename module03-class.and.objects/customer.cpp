@@ -14,13 +14,14 @@ const string &customer::getLastName() const {
 }
 
 account &customer::getCustomerAccount() {
-    return customerAccount;
+    return customerAccount[0];
 }
 
-void customer::setCustomerAccount(account &customerAccount) {
+void customer::setCustomerAccount(account *customerAccount) {
     this->customerAccount = customerAccount;
 }
 
 customer::~customer() {
     cout << "customer::~customer()" << endl;
+    delete customerAccount;
 }

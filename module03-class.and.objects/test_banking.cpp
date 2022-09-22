@@ -1,9 +1,11 @@
 #include <iostream>
 #include "customer.h"
 #include "account.h"
+#include "savings_account.h"
 
 using banking::customer;
 using banking::account;
+using banking::SavingsAccount;
 using namespace std;
 
 int main() {
@@ -12,10 +14,10 @@ int main() {
 
     // Create an account that can has a 500.00 balance.
     cout << endl << "Creating the customer Jane Smith.";
-    cust = new customer("Jane", "Smith", "tr1"); // pointer points the object at the heap
+    cust = new customer("Jane", "Smith", nullptr); // pointer points the object at the heap
     cout << endl << "Creating her account with a 500.00 balance.";
 
-    cust->setCustomerAccount(acc1);
+    cust->setCustomerAccount(new SavingsAccount("tr1",1'000'000,12));
     acc1 = cust->getCustomerAccount();
 
     cout << endl << "Withdraw 150.00";

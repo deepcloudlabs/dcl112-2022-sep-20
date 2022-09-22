@@ -3,6 +3,7 @@
 
 #include <string>
 #include "account.h"
+#include "checking_account.h"
 
 using namespace std;
 
@@ -10,12 +11,12 @@ namespace banking {
     class customer {
         string firstName;
         string lastName;
-        account customerAccount;
+        account *customerAccount;
         int *p;
     public:
-        customer(const string &firstName, const string &lastName, const string &iban)
+        customer(const string &firstName, const string &lastName, account *customerAccount)
                 : firstName(firstName), lastName(lastName),
-                  customerAccount(iban) {}
+                  customerAccount(customerAccount) {}
 
         const string &getFirstName() const;
 
@@ -23,7 +24,7 @@ namespace banking {
 
         account &getCustomerAccount();
 
-        void setCustomerAccount(account &customerAccount);
+        void setCustomerAccount(account *customerAccount);
 
         ~customer();
     };

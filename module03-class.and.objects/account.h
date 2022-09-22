@@ -20,7 +20,7 @@ namespace banking {
 
         account(const string &iban, double balance);
 
-        ~account();
+        virtual ~account();
 
         // getters -> read-only methods
         const string &getIban() const; // constant method
@@ -28,9 +28,9 @@ namespace banking {
         double getBalance() const; // constant method
 
         // business methods -> mutator methods
-        bool withdraw(const double amount);
+        virtual bool withdraw(const double amount);
 
-        bool deposit(const double amount);
+        virtual bool deposit(const double amount);
     };
 
 } // banking
