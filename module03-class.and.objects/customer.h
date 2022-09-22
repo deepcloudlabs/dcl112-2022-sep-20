@@ -15,7 +15,18 @@ namespace banking {
         int numOfAccounts;
     public:
         Customer(const string &firstName, const string &lastName) : firstName(firstName), lastName(lastName),
-                                                                    accounts(new Account *[10]), numOfAccounts(0) {}
+                                                                    accounts(new Account *[10]), numOfAccounts(0) {
+            cerr << "Customer::Customer(const string &firstName, const string &lastName)" << endl;
+        }
+
+        Customer(const Customer &other) : firstName(other.firstName), lastName(other.lastName){
+            cerr << "Customer::Customer(const Customer &other)" << endl;
+            accounts = new Account *[10];
+            numOfAccounts = other.numOfAccounts;
+            for (auto i=0;i< numOfAccounts;++i){
+                accounts[i] = other.accounts[i];
+            }
+        }
 
         const string &getFirstName() const;
 

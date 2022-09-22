@@ -1,29 +1,31 @@
 #include "bank.h"
 #include "customer.h"
+#include "standard_account.h"
 #include <iostream>
 
 using banking::bank;
 using banking::Customer;
+using banking::StandardAccount;
 using namespace std;
 
 int main() {
     auto garantiBbva = new bank(); // heap object
     auto jack = garantiBbva->addCustomer("jack", "bauer", "tr1");
+    jack->addAccount(new StandardAccount("tr1",1'000));
     auto kate = garantiBbva->addCustomer("kate", "austen", "tr2");
-    // stack object
-    bank denizBank(*garantiBbva); // copy constructor -> stack object
-    for (auto i = 0; i < denizBank.getNumberOfCustomers(); ++i) {
-        auto cust = denizBank.getCustomer(i);
-        auto acc = cust->getCustomerAccount();
-        acc.deposit(i * 10'000 + 5'000);
+    kate->addAccount(new StandardAccount("tr2",2'000));
+    for (auto i = 0; i < garantiBbva->getNumberOfCustomers(); ++i) {
+        auto customer = garantiBbva->getCustomer(i);
+        auto acc = customer->getAccount(0);
+        acc->deposit(i * 10'000 + 5'000);
         // Print out the final Account balance
         cout << endl
              << "Customer ["
-             << cust->getLastName()
+             << customer->getLastName()
              << ", "
-             << cust->getFirstName()
+             << customer->getFirstName()
              << "] has a balance of "
-             << acc.getBalance()
+             << acc->getBalance()
              << endl;
     }
     delete garantiBbva;

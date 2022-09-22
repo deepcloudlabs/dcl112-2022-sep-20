@@ -43,7 +43,7 @@ double Customer::withdrawCost(const double cost) const {
 }
 
 Customer::~Customer() {
-    cout << "Customer::Customer()" << endl;
+    cout << "Customer::~Customer()" << endl;
     for (auto i = 0; i < numOfAccounts; ++i) {
         delete accounts[i];
     }

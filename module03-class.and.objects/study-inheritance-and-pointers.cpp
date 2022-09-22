@@ -11,7 +11,7 @@ int main(){
     B *q= new C; // B, C
     C *r = new C;
     F *u = new Z; // F, Z
-    G *v = new Z; // G, Z
+    // G *v = new Z; // G, Z
     // Error: F *w = new G;
     return 0;
 }
