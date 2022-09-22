@@ -11,6 +11,7 @@ namespace banking {
     private: // default
         // attributes/field/state/data/property
         string iban;
+    protected:
         double balance;
     public:
         // methods/function/behaviour
