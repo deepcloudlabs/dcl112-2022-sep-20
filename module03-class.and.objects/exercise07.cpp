@@ -3,7 +3,7 @@
 #include <iostream>
 
 using banking::bank;
-using banking::customer;
+using banking::Customer;
 using namespace std;
 
 int main() {
@@ -16,7 +16,7 @@ int main() {
         auto cust = denizBank.getCustomer(i);
         auto acc = cust->getCustomerAccount();
         acc.deposit(i * 10'000 + 5'000);
-        // Print out the final account balance
+        // Print out the final Account balance
         cout << endl
              << "Customer ["
              << cust->getLastName()

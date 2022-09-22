@@ -4,25 +4,30 @@
 
 #ifndef MODULE03_CLASS_AND_OBJECTS_SAVINGS_ACCOUNT_H
 #define MODULE03_CLASS_AND_OBJECTS_SAVINGS_ACCOUNT_H
+
 #include "account.h"
 #include <iostream>
 
 namespace banking {
 
-    class SavingsAccount : public account {
+    class SavingsAccount : public Account {
         const double interestRate;
     public:
-        SavingsAccount(const string &iban,const double balance,const double interestRate)
-           : account(iban,balance), interestRate(interestRate) {
-           std::cout << "SavingsAccount::SavingsAccount(...)" << std::endl;
+        SavingsAccount(const string &iban, const double balance, const double interestRate)
+                : Account(iban, balance), interestRate(interestRate) {
+            std::cout << "SavingsAccount::SavingsAccount(...)" << std::endl;
         }
+
+        bool withdraw(const double amount) override;
+
+        bool deposit(const double amount) override;
 
         double getInterestRate() const {
             return interestRate;
         }
 
-        ~SavingsAccount(){
-           std::cout << "SavingsAccount::~SavingsAccount()" << std::endl;
+        ~SavingsAccount() {
+            std::cout << "SavingsAccount::~SavingsAccount()" << std::endl;
         }
     };
 

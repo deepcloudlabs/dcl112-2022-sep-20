@@ -5,46 +5,22 @@ using namespace std;
 
 // definition
 namespace banking {
-    // definition
-    bool account::withdraw(const double amount) {
-        // validation
-        if (amount <= 0.0) return false;
-        // business rule
-        if (amount > this->balance) return false;
-        // business logic
-        this->balance -= amount;
-        return true;
+
+    Account::Account(const string &iban) : Account(iban, 10.0) {}
+
+    Account::Account(const string &iban, double balance) : iban(iban), balance(balance) {
+        cout << "Account::Account(...)" << endl;
     }
 
-    bool account::deposit(const double amount) {
-        // validation
-        if (amount <= 0.0) return false;
-        // business logic
-        this->balance += amount;
-        return true;
-    }
-
-    account::account(const string &iban) : account(iban, 10.0) {}
-
-    /*
-    account::account(const string &iban, double balance) {
-        this->balance = balance;
-        this->iban = iban;
-    }
-*/
-    account::account(const string &iban, double balance) : iban(iban), balance(balance) {
-        cout << "account::account(...)" << endl;
-    }
-
-    const string &account::getIban() const {
+    const string &Account::getIban() const {
         return iban;
     }
 
-    double account::getBalance() const {
+    double Account::getBalance() const {
         return balance;
     }
 
-    account::~account() {
-        cout << "account::~account()" << endl;
+    Account::~Account() {
+        cout << "Account::~Account()" << endl;
     }
 } // banking

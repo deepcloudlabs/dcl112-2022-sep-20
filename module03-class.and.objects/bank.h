@@ -6,7 +6,7 @@
 namespace banking {
 
     class bank {
-        customer **customers;
+        Customer **customers;
         int numOfCustomers;
     public:
         bank(); // Default constructor
@@ -17,11 +17,11 @@ namespace banking {
 
         ~bank(); // destructor
 
-        customer *addCustomer(const string &firstName, const string &lastName, const string &iban);
+        Customer *addCustomer(const string &firstName, const string &lastName, const string &iban);
 
         int getNumberOfCustomers() const;
 
-        customer *getCustomer(const int index) const;
+        Customer *getCustomer(const int index) const;
 
     };
 

@@ -10,4 +10,12 @@ namespace banking {
         this->balance -= amount;
         return true;
     }
+
+    bool CheckingAccount::deposit(const double amount) {
+        // validation
+        if (amount <= 0.0) return false;
+        // business logic
+        this->balance += amount;
+        return true;
+    }
 } // banking

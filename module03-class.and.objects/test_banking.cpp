@@ -3,22 +3,24 @@
 #include "account.h"
 #include "savings_account.h"
 #include "checking_account.h"
+#include "standard_account.h"
 
-using banking::customer;
-using banking::account;
+using banking::Customer;
+using banking::Account;
 using banking::SavingsAccount;
 using banking::CheckingAccount;
+using banking::StandardAccount;
 using namespace std;
 
 int main() {
-    cout << "Creating the customer Jack Bauer." << endl;
-    auto jack = new customer("jack", "bauer"); // pointer points the object at the heap
+    cout << "Creating the Customer Jack Bauer." << endl;
+    auto jack = new Customer("jack", "bauer"); // pointer points the object at the heap
 
     jack->addAccount(new SavingsAccount("tr1", 1'000'000, 12));
     jack->addAccount(new CheckingAccount("tr2", 2'000'000, 5'000));
-    jack->addAccount(new account("tr3", 3'000'000));
+    jack->addAccount(new StandardAccount("tr3", 3'000'000));
 
-    // Print out the final account balance
+    // Print out the final Account balance
     cout << "Customer ["
          << jack->getLastName()
          << ", "
@@ -29,7 +31,7 @@ int main() {
 
     jack->withdrawCost(800);
 
-    // Print out the final account balance
+    // Print out the final Account balance
     cout << endl
          << "Customer ["
          << jack->getLastName()
@@ -39,6 +41,6 @@ int main() {
          << jack->getTotalBalance()
          << endl;
 
-    delete jack; // destroys the customer object! -> calls destructor
+    delete jack; // destroys the Customer object! -> calls destructor
     return 0;
 }

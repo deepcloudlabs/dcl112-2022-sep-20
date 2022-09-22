@@ -7,7 +7,7 @@ using namespace std;
 // declaration
 namespace banking {
     // information hiding
-    class account {
+    class Account { // abstract class
     private: // default
         // attributes/field/state/data/property
         string iban;
@@ -16,11 +16,11 @@ namespace banking {
     public:
         // methods/function/behaviour
         // overloaded 2 constructors
-        explicit account(const string &iban);
+        explicit Account(const string &iban);
 
-        account(const string &iban, double balance);
+        Account(const string &iban, double balance);
 
-        virtual ~account();
+        virtual ~Account();
 
         // getters -> read-only methods
         const string &getIban() const; // constant method
@@ -28,9 +28,8 @@ namespace banking {
         double getBalance() const; // constant method
 
         // business methods -> mutator methods
-        virtual bool withdraw(const double amount);
-
-        virtual bool deposit(const double amount);
+        virtual bool withdraw(const double amount)=0; // pure virtual method
+        virtual bool deposit(const double amount)=0; // pure virtual method
     };
 
 } // banking

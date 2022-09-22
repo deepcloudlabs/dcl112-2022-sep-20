@@ -1,30 +1,30 @@
 #include <iostream>
 #include "customer.h"
 
-using banking::customer;
-using banking::account;
+using banking::Customer;
+using banking::Account;
 using namespace std;
 
-const string &customer::getFirstName() const {
+const string &Customer::getFirstName() const {
     return firstName;
 }
 
-const string &customer::getLastName() const {
+const string &Customer::getLastName() const {
     return lastName;
 }
 
-account *customer::getAccount(const int index) const {
+Account *Customer::getAccount(const int index) const {
     if (index < 0) return nullptr;
     if (index >= numOfAccounts) return nullptr;
     return accounts[index];
 }
 
-void customer::addAccount(account *customerAccount) {
+void Customer::addAccount(Account *customerAccount) {
     if (numOfAccounts >= 10) return;
     this->accounts[numOfAccounts++] = customerAccount;
 }
 
-double customer::getTotalBalance() const {
+double Customer::getTotalBalance() const {
     auto total = 0.0;
     for (auto i = 0; i < numOfAccounts; ++i) {
         total += accounts[i]->getBalance();
@@ -32,7 +32,7 @@ double customer::getTotalBalance() const {
     return total;
 }
 
-double customer::withdrawCost(const double cost) const {
+double Customer::withdrawCost(const double cost) const {
     auto total = 0.0;
     for (auto i = 0; i < numOfAccounts; ++i) {
         if(accounts[i]->withdraw(cost)){
@@ -42,14 +42,14 @@ double customer::withdrawCost(const double cost) const {
     return total;
 }
 
-customer::~customer() {
-    cout << "customer::~customer()" << endl;
+Customer::~Customer() {
+    cout << "Customer::Customer()" << endl;
     for (auto i = 0; i < numOfAccounts; ++i) {
         delete accounts[i];
     }
     delete[]accounts;
 }
 
-int customer::getNumberOfAccounts() const {
+int Customer::getNumberOfAccounts() const {
     return numOfAccounts;
 }
