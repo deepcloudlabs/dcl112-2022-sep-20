@@ -13,6 +13,7 @@ class B {
 class A {
 public:
     int *p;
+
     A(int value) {
         p = new int{value};
     }
@@ -33,6 +34,7 @@ public:
 class D {
 public:
     int x;
+
     D(int x) : x(x) {
         cout << "D(int x)" << endl;
     }
@@ -67,7 +69,7 @@ public:
         return *this;
     }
 
-    D operator+(const D& other){
+    D operator+(const D &other) {
         D result(this->x + other.x); // stack
         return result;
     }
@@ -85,7 +87,7 @@ int main() {
     D d7{d2};  // D(const D &other)
     d2 = d4; // operator=(const D &other)
     d1 = d2 = d3; // method chaining
-    d2 = d3 ;
+    d2 = d3;
     d1 = d2;
     d1 = 44;
     return 0;

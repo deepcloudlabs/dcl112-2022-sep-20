@@ -43,7 +43,7 @@ namespace banking {
         return balance;
     }
 
-    account::~account(){
+    account::~account() {
         cout << "account::~account()" << endl;
     }
 } // banking

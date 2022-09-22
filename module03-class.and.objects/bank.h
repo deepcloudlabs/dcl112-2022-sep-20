@@ -6,22 +6,22 @@
 namespace banking {
 
     class bank {
-        customer* *customers;
+        customer **customers;
         int numOfCustomers;
     public:
         bank(); // Default constructor
 
-        bank(const bank& other); // Copy constructor
+        bank(const bank &other); // Copy constructor
 
-        void operator=(const bank& other); // assignment operator
+        void operator=(const bank &other); // assignment operator
 
         ~bank(); // destructor
 
-        customer* addCustomer(const string &firstName,const string &lastName,const string &iban);
+        customer *addCustomer(const string &firstName, const string &lastName, const string &iban);
 
-        int getNumberOfCustomers() const ;
+        int getNumberOfCustomers() const;
 
-        customer* getCustomer(const int index) const;
+        customer *getCustomer(const int index) const;
 
     };
 

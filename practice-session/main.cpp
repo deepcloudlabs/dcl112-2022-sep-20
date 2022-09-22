@@ -9,8 +9,8 @@ int main() {
 
     // Create a vehicle that can handle 10,000 kilograms weight
     cout << endl << "Creating a vehicle with a 10,000kg maximum load.";
-    Vehicle vehicle{10000.0,0.0}; // initializer list: since c++11
-    Vehicle vehicle2(10000.0,1000.0);
+    Vehicle vehicle{10000.0, 0.0}; // initializer list: since c++11
+    Vehicle vehicle2(10000.0, 1000.0);
     int x = 42;
     int y{42}; // initializer list: since c++11
 

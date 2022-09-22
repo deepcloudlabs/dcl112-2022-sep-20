@@ -1,13 +1,14 @@
 #include <iostream>
 #include "customer.h"
 #include "account.h"
+
 using banking::customer;
 using banking::account;
 using namespace std;
 
-int main(){
+int main() {
     customer *cust; // pointer is at the stack
-    account acc1("tr1",500.0); // stack object
+    account acc1("tr1", 500.0); // stack object
 
     // Create an account that can has a 500.00 balance.
     cout << endl << "Creating the customer Jane Smith.";
@@ -27,14 +28,14 @@ int main(){
     acc1.withdraw(47.62);
 
     // Print out the final account balance
-    cout  << endl
-          << "Customer ["
-          << cust->getLastName()
-          << ", "
-          << cust->getFirstName()
-          << "] has a balance of "
-          << acc1.getBalance()
-          << endl;
+    cout << endl
+         << "Customer ["
+         << cust->getLastName()
+         << ", "
+         << cust->getFirstName()
+         << "] has a balance of "
+         << acc1.getBalance()
+         << endl;
     delete cust; // destroys the customer object! -> calls destructor
     return 0;
 }

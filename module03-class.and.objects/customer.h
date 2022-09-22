@@ -1,5 +1,6 @@
 #ifndef MODULE03_CLASS_AND_OBJECTS_CUSTOMER_H
 #define MODULE03_CLASS_AND_OBJECTS_CUSTOMER_H
+
 #include <string>
 #include "account.h"
 
@@ -12,14 +13,18 @@ namespace banking {
         account customerAccount;
         int *p;
     public:
-        customer(const string &firstName,const string &lastName,const string &iban)
-               : firstName(firstName), lastName(lastName),
-                 customerAccount(iban)
-               {}
-        const string& getFirstName() const;
-        const string& getLastName() const;
+        customer(const string &firstName, const string &lastName, const string &iban)
+                : firstName(firstName), lastName(lastName),
+                  customerAccount(iban) {}
+
+        const string &getFirstName() const;
+
+        const string &getLastName() const;
+
         account &getCustomerAccount();
+
         void setCustomerAccount(account &customerAccount);
+
         ~customer();
     };
 }

@@ -18,7 +18,9 @@ namespace banking {
         explicit account(const string &iban);
 
         account(const string &iban, double balance);
+
         ~account();
+
         // getters -> read-only methods
         const string &getIban() const; // constant method
 

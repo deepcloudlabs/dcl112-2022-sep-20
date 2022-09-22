@@ -10,15 +10,17 @@ namespace logistics {
         // declaration + definition -> inlined
         //region constructors
         explicit Vehicle(const double maxLoad)
-             : maxLoad(kiloToNews(maxLoad)), load(0.0) {}
-        explicit Vehicle(const double maxLoad,const double load)
-             : maxLoad(kiloToNews(maxLoad)), load(kiloToNews(load)) {}
+                : maxLoad(kiloToNews(maxLoad)), load(0.0) {}
+
+        explicit Vehicle(const double maxLoad, const double load)
+                : maxLoad(kiloToNews(maxLoad)), load(kiloToNews(load)) {}
         //endregion
 
         //region getters
         double getMaxLoad() const {
             return newsToKilo(maxLoad);
         }
+
         double getLoad() const {
             return newsToKilo(load);
         }
@@ -30,6 +32,7 @@ namespace logistics {
     private:
         //region conversion methods: Newton <==> Kilogram
         double newsToKilo(double amount) const;
+
         double kiloToNews(double amount) const;
         //endregion
     };
