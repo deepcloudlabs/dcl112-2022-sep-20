@@ -17,7 +17,6 @@ namespace banking {
         // methods/function/behaviour
         // overloaded 2 constructors
         explicit Account(const string &iban);
-
         Account(const string &iban, double balance);
 
         virtual ~Account();

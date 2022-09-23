@@ -10,3 +10,4 @@ add_executable(study_inheritance study_inheritance.cpp account.cpp account.h cus
 add_executable(study_deleting_copy_constructor_and_assignment_operator study_deleting_copy_constructor_and_assignment_operator.cpp)
 add_executable(study-destructor-in-inheritance study-destructor-in-inheritance.cpp)
 add_executable(study-public-private-inheritance study-public-private-inheritance.cpp)
+add_executable(study_loops study_loops.cpp)

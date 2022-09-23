@@ -2,6 +2,11 @@
 #define MODULE03_CLASS_AND_OBJECTS_CUSTOMER_H
 
 #include <string>
+#include <deque>
+#include <vector>
+#include <map>
+#include <memory>
+#include <optional>
 #include "account.h"
 #include "checking_account.h"
 
@@ -11,37 +16,37 @@ namespace banking {
     class Customer {
         string firstName;
         string lastName;
-        Account **accounts; // one-to-many
-        int numOfAccounts;
+        deque<shared_ptr<Account>> accounts; // one-to-many
     public:
-        Customer(const string &firstName, const string &lastName) : firstName(firstName), lastName(lastName),
-                                                                    accounts(new Account *[10]), numOfAccounts(0) {
+        Customer(const string &firstName, const string &lastName) : firstName(firstName), lastName(lastName) {
             cerr << "Customer::Customer(const string &firstName, const string &lastName)" << endl;
         }
 
-        Customer(const Customer &other) : firstName(other.firstName), lastName(other.lastName){
+        Customer(const Customer &other)
+                    : firstName(other.firstName),
+                      lastName(other.lastName),
+                      accounts(other.accounts){
             cerr << "Customer::Customer(const Customer &other)" << endl;
-            accounts = new Account *[10];
-            numOfAccounts = other.numOfAccounts;
-            for (auto i=0;i< numOfAccounts;++i){
-                accounts[i] = other.accounts[i];
-            }
         }
 
         const string &getFirstName() const;
 
         const string &getLastName() const;
 
-        Account *getAccount(const int index) const;
+        optional<shared_ptr<Account>> getAccount(const int index) const;
 
         int getNumberOfAccounts() const;
-
-        void addAccount(Account *customerAccount);
 
         double getTotalBalance() const;
 
         double withdrawCost(const double cost) const;
 
+        template <typename T>
+        void addAccount(T && acc) {
+            this->accounts.push_back(make_shared<T>(acc));
+        }
+
+        map<string,double> groupByAccountType() const ;
         ~Customer();
     };
 }

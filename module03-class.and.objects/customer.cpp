@@ -1,4 +1,7 @@
 #include <iostream>
+#include <memory>
+#include <algorithm>
+#include <numeric>
 #include "customer.h"
 
 using banking::Customer;
@@ -13,43 +16,66 @@ const string &Customer::getLastName() const {
     return lastName;
 }
 
-Account *Customer::getAccount(const int index) const {
-    if (index < 0) return nullptr;
-    if (index >= numOfAccounts) return nullptr;
-    return accounts[index];
+optional<shared_ptr<Account>> Customer::getAccount(const int index) const {
+    if (index < 0) return nullopt;
+    if (index >= accounts.size()) return nullopt;
+    return optional<shared_ptr<Account>>{accounts[index]};
 }
 
-void Customer::addAccount(Account *customerAccount) {
-    if (numOfAccounts >= 10) return;
-    this->accounts[numOfAccounts++] = customerAccount;
-}
-
-double Customer::getTotalBalance() const {
+double Customer::getTotalBalance()  const {
+    /*
     auto total = 0.0;
-    for (auto i = 0; i < numOfAccounts; ++i) {
-        total += accounts[i]->getBalance();
+    for (auto acc : accounts) { // for-loop
+        total += acc->getBalance();
     }
     return total;
+     */
+    return accumulate(accounts.begin(),
+                      accounts.end(),
+                      double(),
+                      [](double total, const shared_ptr<Account>& acc){
+                        return total + acc->getBalance();
+                      }
+    );
 }
 
 double Customer::withdrawCost(const double cost) const {
+    /*
     auto total = 0.0;
-    for (auto i = 0; i < numOfAccounts; ++i) {
-        if(accounts[i]->withdraw(cost)){
+    for (auto acc : accounts) {
+        if(acc->withdraw(cost)){
             total += cost;
         }
     }
     return total;
+     */
+    return count_if(accounts.begin(),accounts.end(),[cost](auto &acc){
+       return acc->withdraw(cost);
+    }) * cost;
+}
+
+map<string,double> Customer::groupByAccountType() const {
+     return accumulate(
+             accounts.begin(),
+             accounts.end(),
+             map<string,double>(),
+             [](map<string,double> group, auto acc)
+             {
+                 auto key = typeid(*acc).name();
+                 auto balance = acc->getBalance();
+                 if (group.find(key) != group.end()){
+                     balance += group[key];
+                 }
+                 group[key] = balance;
+                 return group;
+             }
+     );
 }
 
 Customer::~Customer() {
     cout << "Customer::~Customer()" << endl;
-    for (auto i = 0; i < numOfAccounts; ++i) {
-        delete accounts[i];
-    }
-    delete[]accounts;
 }
 
 int Customer::getNumberOfAccounts() const {
-    return numOfAccounts;
+    return accounts.size();
 }
