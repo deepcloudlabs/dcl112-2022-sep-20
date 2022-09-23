@@ -14,11 +14,13 @@ using namespace std;
 
 namespace banking {
     class Customer {
+        string identity;
         string firstName;
         string lastName;
         deque<shared_ptr<Account>> accounts; // one-to-many
     public:
-        Customer(const string &firstName, const string &lastName) : firstName(firstName), lastName(lastName) {
+        Customer(const string &identity,const string &firstName, const string &lastName)
+               : identity(identity),firstName(firstName), lastName(lastName) {
             cerr << "Customer::Customer(const string &firstName, const string &lastName)" << endl;
         }
 
@@ -32,6 +34,8 @@ namespace banking {
         const string &getFirstName() const;
 
         const string &getLastName() const;
+
+        const string &getIdentity() const;
 
         optional<shared_ptr<Account>> getAccount(const int index) const;
 

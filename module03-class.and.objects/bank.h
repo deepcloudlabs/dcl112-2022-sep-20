@@ -2,12 +2,17 @@
 #define MODULE03_CLASS_AND_OBJECTS_BANK_H
 
 #include "customer.h"
+#include <vector>
+#include <memory>
+#include <optional>
+
+using namespace std;
 
 namespace banking {
 
     class bank {
-        Customer **customers;
-        int numOfCustomers;
+        vector<shared_ptr<Customer>> customers;
+        map<string,shared_ptr<Customer>> customersMap;
     public:
         bank(); // Default constructor
 
@@ -17,11 +22,12 @@ namespace banking {
 
         ~bank(); // destructor
 
-        Customer *addCustomer(const string &firstName, const string &lastName, const string &iban);
+        shared_ptr<Customer> addCustomer(const string &identity,const string &firstName, const string &lastName, const string &iban);
 
         int getNumberOfCustomers() const;
 
-        Customer *getCustomer(const int index) const;
+        optional<shared_ptr<Customer>> getCustomer(const int index) const;
+        optional<shared_ptr<Customer>> getCustomer(const string &identity) const;
 
     };
 

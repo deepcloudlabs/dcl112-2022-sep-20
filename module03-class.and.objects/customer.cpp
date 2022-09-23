@@ -22,7 +22,11 @@ optional<shared_ptr<Account>> Customer::getAccount(const int index) const {
     return optional<shared_ptr<Account>>{accounts[index]};
 }
 
-double Customer::getTotalBalance()  const {
+const string& Customer::getIdentity() const {
+    return identity;
+}
+
+double Customer::getTotalBalance() const {
     /*
     auto total = 0.0;
     for (auto acc : accounts) { // for-loop
@@ -33,8 +37,8 @@ double Customer::getTotalBalance()  const {
     return accumulate(accounts.begin(),
                       accounts.end(),
                       double(),
-                      [](double total, const shared_ptr<Account>& acc){
-                        return total + acc->getBalance();
+                      [](double total, const shared_ptr<Account> &acc) {
+                          return total + acc->getBalance();
                       }
     );
 }
@@ -49,27 +53,26 @@ double Customer::withdrawCost(const double cost) const {
     }
     return total;
      */
-    return count_if(accounts.begin(),accounts.end(),[cost](auto &acc){
-       return acc->withdraw(cost);
+    return count_if(accounts.begin(), accounts.end(), [cost](auto &acc) {
+        return acc->withdraw(cost);
     }) * cost;
 }
 
-map<string,double> Customer::groupByAccountType() const {
-     return accumulate(
-             accounts.begin(),
-             accounts.end(),
-             map<string,double>(),
-             [](map<string,double> group, auto acc)
-             {
-                 auto key = typeid(*acc).name();
-                 auto balance = acc->getBalance();
-                 if (group.find(key) != group.end()){
-                     balance += group[key];
-                 }
-                 group[key] = balance;
-                 return group;
-             }
-     );
+map<string, double> Customer::groupByAccountType() const {
+    return accumulate(
+            accounts.begin(),
+            accounts.end(),
+            map<string, double>(),
+            [](map<string, double> group, auto acc) {
+                auto key = typeid(*acc).name();
+                auto balance = acc->getBalance();
+                if (group.find(key) != group.end()) {
+                    balance += group[key];
+                }
+                group[key] = balance;
+                return group;
+            }
+    );
 }
 
 Customer::~Customer() {
