@@ -1,5 +1,7 @@
 #include "bank.h"
 #include <iostream>
+#include <algorithm>
+#include <numeric>
 
 using namespace std;
 
@@ -39,6 +41,18 @@ namespace banking {
         if (index < 0) return nullopt;
         if (index >= customers.size()) return nullptr;
         return optional(customers[index]);
+    }
+
+    double bank::getTotalBalance() const{
+         return accumulate(customers.begin(),customers.end(),double(),[](double sum,auto &customer){
+             return sum + customer->getTotalBalance();
+         });
+    }
+
+    int bank::getTotalAccounts() const{
+        return accumulate(customers.begin(),customers.end(),double(),[](double sum,auto &customer){
+            return sum + customer->getNumberOfAccounts();
+        });
     }
 
     optional<shared_ptr<Customer>> bank::getCustomer(const string &identity) const {

@@ -29,6 +29,8 @@ namespace banking {
         optional<shared_ptr<Customer>> getCustomer(const int index) const;
         optional<shared_ptr<Customer>> getCustomer(const string &identity) const;
 
+        double getTotalBalance() const;
+        int getTotalAccounts() const;
     };
 
 } // banking
