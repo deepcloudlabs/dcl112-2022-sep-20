@@ -4,7 +4,7 @@
 using banking::CheckingAccount;
 using namespace std;
 
-int main(){
+int main() {
 
     CheckingAccount acc1("tr1", 100'000, 10'000);
     cout << "acc1.getBalance():" << acc1.getBalance() << endl;

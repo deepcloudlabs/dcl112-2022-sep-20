@@ -36,8 +36,8 @@ public:
 int main() {
     A *p = new A();
     {
-      A a;
-      // trigger A's destructor
+        A a;
+        // trigger A's destructor
     }
     delete p; // trigger A's destructor
 

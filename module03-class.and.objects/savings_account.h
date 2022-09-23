@@ -13,10 +13,11 @@ namespace banking {
     class SavingsAccount : public Account {
         const double interestRate;
     public:
-        SavingsAccount(const string &iban= "", const double balance=0.0, const double interestRate=1.0)
+        SavingsAccount(const string &iban = "", const double balance = 0.0, const double interestRate = 1.0)
                 : Account(iban, balance), interestRate(interestRate) {
             std::cout << "SavingsAccount::SavingsAccount(...)" << std::endl;
         }
+
         bool withdraw(const double amount) override;
 
         bool deposit(const double amount) override;

@@ -18,18 +18,18 @@ namespace banking {
         cout << "bank::operator=(const bank& other)" << endl;
         customers.clear();
         customersMap.clear();
-        customers.insert(customers.begin(),other.customers.begin(),other.customers.end());
-        customersMap.insert(other.customersMap.begin(),other.customersMap.end());
+        customers.insert(customers.begin(), other.customers.begin(), other.customers.end());
+        customersMap.insert(other.customersMap.begin(), other.customersMap.end());
     }
 
     bank::~bank() {
         cout << "bank::~bank()" << endl;
     }
 
-    shared_ptr<Customer> bank::addCustomer(const string &identity,const string &firstName, const string &lastName, const string &iban) {
-        auto customer = make_shared<Customer>(Customer(identity,firstName, lastName));
+    shared_ptr<Customer> bank::addCustomer(const string &identity, const string &firstName, const string &lastName) {
+        auto customer = make_shared<Customer>(Customer(identity, firstName, lastName));
         customersMap[identity] = customer;
-        customers.insert(customers.end(),customer);
+        customers.insert(customers.end(), customer);
         return customer;
     }
 
@@ -43,14 +43,14 @@ namespace banking {
         return optional(customers[index]);
     }
 
-    double bank::getTotalBalance() const{
-         return accumulate(customers.begin(),customers.end(),double(),[](double sum,auto &customer){
-             return sum + customer->getTotalBalance();
-         });
+    double bank::getTotalBalance() const {
+        return accumulate(customers.begin(), customers.end(), double(), [](double sum, auto &customer) {
+            return sum + customer->getTotalBalance();
+        });
     }
 
-    int bank::getTotalAccounts() const{
-        return accumulate(customers.begin(),customers.end(),double(),[](double sum,auto &customer){
+    int bank::getTotalAccounts() const {
+        return accumulate(customers.begin(), customers.end(), double(), [](double sum, auto &customer) {
             return sum + customer->getNumberOfAccounts();
         });
     }
@@ -67,6 +67,21 @@ namespace banking {
         auto customer = customersMap.find(identity);
         if (customer == customersMap.end()) return nullopt;
         return optional(customer->second);
+    }
+
+    void bank::report() const {
+        cout << "Bank report:" << endl;
+        cout << "There are " << getNumberOfCustomers() << " customers." << endl;
+        cout << "There are " << getTotalAccounts() << " accounts." << endl;
+        cout << "Customers are reported:" << endl;
+        for (const auto &[identity, customer]: customersMap) {
+            cout << customer->getLastName() << ", "
+                 << customer->getFirstName() << ", "
+                 << "# of accounts: " << customer->getNumberOfAccounts() << ", "
+                 << "total balance: " << customer->getTotalBalance()
+                 << endl;
+
+        }
     }
 
 } // banking

@@ -12,7 +12,7 @@ namespace banking {
 
     class bank {
         vector<shared_ptr<Customer>> customers;
-        map<string,shared_ptr<Customer>> customersMap;
+        map<string, shared_ptr<Customer>> customersMap;
     public:
         bank(); // Default constructor
 
@@ -22,15 +22,19 @@ namespace banking {
 
         ~bank(); // destructor
 
-        shared_ptr<Customer> addCustomer(const string &identity,const string &firstName, const string &lastName, const string &iban);
+        shared_ptr<Customer> addCustomer(const string &identity, const string &firstName, const string &lastName);
 
         int getNumberOfCustomers() const;
 
         optional<shared_ptr<Customer>> getCustomer(const int index) const;
+
         optional<shared_ptr<Customer>> getCustomer(const string &identity) const;
 
         double getTotalBalance() const;
+
         int getTotalAccounts() const;
+
+        void report() const;
     };
 
 } // banking

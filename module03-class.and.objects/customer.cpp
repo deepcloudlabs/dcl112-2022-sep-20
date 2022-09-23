@@ -22,7 +22,7 @@ optional<shared_ptr<Account>> Customer::getAccount(const int index) const {
     return optional<shared_ptr<Account>>{accounts[index]};
 }
 
-const string& Customer::getIdentity() const {
+const string &Customer::getIdentity() const {
     return identity;
 }
 

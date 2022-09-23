@@ -15,7 +15,7 @@ using namespace std;
 
 int main() {
     cout << "Creating the Customer Jack Bauer." << endl;
-    auto jack = new Customer("11111111110","jack", "bauer"); // pointer points the object at the heap
+    auto jack = new Customer("11111111110", "jack", "bauer"); // pointer points the object at the heap
 
     jack->addAccount(SavingsAccount("tr1", 1'000'000, 12));
     jack->addAccount(CheckingAccount("tr2", 2'000'000, 5'000));

@@ -4,11 +4,11 @@
 
 using namespace std;
 
-void print(int &number){ // pure function
+void print(int &number) { // pure function
     cout << "number: " << number << endl;
 }
 
-bool isOdd(int number){
+bool isOdd(int number) {
     return number & 1;
 }
 
@@ -29,7 +29,7 @@ int main() {
 
     // Loop #2 : outer loop
     sum = 0;
-    for (auto& number : numbers) { // safe
+    for (auto &number: numbers) { // safe
         if (number & 1) {
             sum = sum + number * number;
         }
@@ -42,14 +42,13 @@ int main() {
     // 2. pure function
     // auto numOfOdds = count_if(numbers,numbers+size,isOdd); // higher-order function
     int state = 42;
-    auto numOfOdds = accumulate(numbers,numbers+size,int(),
-       [](int acc, int &value)
-       {
-        if (value & 1)
-          return acc + value * value;
-        return acc;
-       }
-     ); // higher-order function
+    auto numOfOdds = accumulate(numbers, numbers + size, int(),
+                                [](int acc, int &value) {
+                                    if (value & 1)
+                                        return acc + value * value;
+                                    return acc;
+                                }
+    ); // higher-order function
     cout << "number of odds: " << numOfOdds << endl;
 
     return 0;

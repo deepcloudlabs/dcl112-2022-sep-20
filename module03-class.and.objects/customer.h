@@ -19,15 +19,15 @@ namespace banking {
         string lastName;
         deque<shared_ptr<Account>> accounts; // one-to-many
     public:
-        Customer(const string &identity,const string &firstName, const string &lastName)
-               : identity(identity),firstName(firstName), lastName(lastName) {
+        Customer(const string &identity, const string &firstName, const string &lastName)
+                : identity(identity), firstName(firstName), lastName(lastName) {
             cerr << "Customer::Customer(const string &firstName, const string &lastName)" << endl;
         }
 
         Customer(const Customer &other)
-                    : firstName(other.firstName),
-                      lastName(other.lastName),
-                      accounts(other.accounts){
+                : firstName(other.firstName),
+                  lastName(other.lastName),
+                  accounts(other.accounts) {
             cerr << "Customer::Customer(const Customer &other)" << endl;
         }
 
@@ -45,12 +45,13 @@ namespace banking {
 
         double withdrawCost(const double cost) const;
 
-        template <typename T>
-        void addAccount(T && acc) {
+        template<typename T>
+        void addAccount(T &&acc) {
             this->accounts.push_back(make_shared<T>(acc));
         }
 
-        map<string,double> groupByAccountType() const ;
+        map<string, double> groupByAccountType() const;
+
         ~Customer();
     };
 }

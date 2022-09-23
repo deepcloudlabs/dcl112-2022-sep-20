@@ -1,11 +1,11 @@
 class Precious {
 public:
-    void fun(){}
+    void fun() {}
 };
 
 class YourClass : public Precious {
 public:
-    void gun(){
+    void gun() {
         fun();
     }
 };
@@ -13,7 +13,7 @@ public:
 class AnotherClass {
     Precious p; // composition
 public:
-    void gun(){
+    void gun() {
         p.fun();
     }
 };
@@ -22,14 +22,17 @@ class A {
 public:
     int x;
 };
+
 class B : public A {
 public:
 
 };
+
 class C : private A {
 
 };
-int main(){
+
+int main() {
     A a;
     a.x = 42;
     B b;
